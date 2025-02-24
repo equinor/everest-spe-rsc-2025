@@ -1,0 +1,43 @@
+environment:
+  random_seed: 2978010
+#  output_folder: r{{configpath}}/../output/simple
+#  simulation_folder: r{{configpath}}/../output/simple/sim_output
+
+controls:
+- max: 1.0
+  min: -1.0
+  name: coordinates
+  perturbation_magnitude: 0.02
+  type: generic_control
+  variables:
+  - {name: x, initial_guess:  0.40 }
+  - {name: y, initial_guess: -0.25 }
+
+objective_functions:
+- name: objective
+#  normalization: 1.0
+#  weight: 1.0
+
+model:
+  realizations:
+  - 1
+
+optimization:
+#  algorithm: optpp_q_newton
+#  backend: dakota
+#  max_batch_num: 10
+#  options:
+#    - max_step 0.1
+  perturbation_num: 10
+
+#simulator:
+#  name: mr
+#  queue_system: lsf
+
+install_jobs:
+- name: forward_model
+  source: r{{configpath}}/../input/forward_model
+
+forward_model:
+  - forward_model --input coordinates.json --output objective
+  
