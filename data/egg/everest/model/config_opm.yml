@@ -68,8 +68,9 @@ optimization:
 
 
 simulator:
-  queue_system: lsf
-  cores: 200
+  queue_system:
+    name: lsf
+    max_running: 200
 
 model:
   realizations: [6,10,31,22,24,45,50,68,36,62]
