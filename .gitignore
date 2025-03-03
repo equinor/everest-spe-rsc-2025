@@ -1,7 +1,3 @@
-# optimization results
-
-data/simple/everest/model/everest_output*
-
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
