@@ -1,5 +1,3 @@
 EXECUTABLE  ./forward_model.py
 STDOUT forward_model.stdout
 STDERR forward_model.stderr
-
-TARGET_FILE forward_model.ok

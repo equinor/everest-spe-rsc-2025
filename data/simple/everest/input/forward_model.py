@@ -32,6 +32,3 @@ z = simple(coordinates['x'], coordinates['y'])
 
 with open(args.output, 'w') as g:
 	g.write(str(z))
-
-with open("forward_model.ok", "w"):
-    pass    
