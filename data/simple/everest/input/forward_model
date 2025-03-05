@@ -1,3 +1,1 @@
 EXECUTABLE  ./forward_model.py
-STDOUT forward_model.stdout
-STDERR forward_model.stderr
