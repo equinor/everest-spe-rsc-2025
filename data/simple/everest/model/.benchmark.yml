@@ -9,9 +9,14 @@ objective_functions:
   weight: 1.0
 
 optimization:
+  speculative: true
   perturbation_num: 10
   algorithm: optpp_q_newton
   backend: dakota
   max_batch_num: 10
   options:
     - max_step 0.1
+
+export:
+  discard_gradient: false
+  discard_rejected: false
