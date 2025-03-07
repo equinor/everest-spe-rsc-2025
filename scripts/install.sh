@@ -1,6 +1,8 @@
 #!/bin/bash
 
-python -m venv .venv
+python -m venv everest
+source everest/bin/activate
+
 pip install pip -U
 pip install 'ert[everest]==14'
 pip install everviz
