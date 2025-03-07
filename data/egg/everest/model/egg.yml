@@ -60,11 +60,8 @@ optimization:
   algorithm: conmin_mfd
   min_realizations_success: 1
   min_pert_success: 1
-  max_function_evaluations: 5000
   perturbation_num: 2 
-  max_iterations:  10
   max_batch_num: 1 #10 
-  speculative: True
 
 simulator:
   queue_system:
@@ -73,6 +70,7 @@ simulator:
 
 model:
   realizations: [6, 10, 31, 22, 24, 45, 50, 68, 36, 62]
+  data_file: r{{flow_folder}}/model/EGG_MODEL_FLOW.DATA
 
 install_data:
   - link: False
@@ -95,5 +93,5 @@ forward_model:
   - well_constraints  -i files/wells_readydate.json -c files/injection_rate_contraints.yml -rc well_rate.json -o wc_wells.json
   - add_templates     -i wc_wells.json -c files/template_config.yml -o at_wells.json
   - schmerge          -s r{{flow_folder}}/model/SCHEDULE_TEMPLATE.SCH -i at_wells.json -o flow/model/EGG_RATES_EVEREST.SCH
-  - flow               flow/model/r{{case_name}}.DATA
+  - flow               r{{flowbase}}.DATA
   - npv               -s r{{flowbase}}.UNSMRY -o npv -c files/prices.yml -sd 2025-03-25 -ed 2035-11-05 -i files/wells_readydate.json
