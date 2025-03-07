@@ -1,12 +1,13 @@
 definitions:
-  opm_folder: r{{configpath}}/../../opm/
-  opmbase: opm/model/r{{case_name}}
-  realization_folder: r{{configpath}}/../../opm/realizations/realization-r{{realization}}
+  case_name: EGG_INJECTION_RATES
   user_shortname: r{{os.USER}}
-  case_name: EGG_RATES_RSS
+  flow_folder: r{{configpath}}/../../flow/
+  flowbase: flow/model/r{{case_name}}
+  realization_folder: r{{configpath}}/../../flow/realizations/realization-r{{realization}}
+
 environment:
-  simulation_folder: ../output/r{{case_name}}/simulation_output
-  output_folder: ../output/r{{case_name}}
+  simulation_folder: r{{configpath}}/../output/r{{case_name}}/simulation_output
+  output_folder: r{{configpath}}/../output/r{{case_name}}
   random_seed: 123456
 
 wells:
@@ -20,8 +21,7 @@ wells:
   - { name: INJECT8 }
 
 controls:
-  -
-    name: well_rate
+  - name: well_rate
     type: generic_control
     min: 0.001
     max: 1
@@ -54,7 +54,7 @@ controls:
 objective_functions:
   - name: npv
     weight: 1
-    normalization: 0.00000001
+    scale: 0.00000001
 
 optimization:
   algorithm: conmin_mfd
@@ -63,9 +63,8 @@ optimization:
   max_function_evaluations: 5000
   perturbation_num: 2 
   max_iterations:  10
-  max_batch_num:  10 
+  max_batch_num: 1 #10 
   speculative: True
-
 
 simulator:
   queue_system:
@@ -73,21 +72,18 @@ simulator:
     max_running: 200
 
 model:
-  realizations: [6,10,31,22,24,45,50,68,36,62]
-  data_file: r{{opm_initial_data}}
-
-
+  realizations: [6, 10, 31, 22, 24, 45, 50, 68, 36, 62]
 
 install_data:
   - link: False
-    source: r{{opm_folder}}/include
-    target: opm/model/include
+    source: r{{flow_folder}}/include
+    target: flow/model/include
   - link: False
-    source: r{{opm_folder}}/model/EGG_MODEL_OPM.DATA
-    target: r{{opmbase}}.DATA
+    source: r{{flow_folder}}/model/EGG_MODEL_FLOW.DATA
+    target: r{{flowbase}}.DATA
   - link: False
     source: r{{realization_folder}}/PERM_ECL.INC
-    target: opm/model/PERM_ECL.INC
+    target: flow/model/PERM_ECL.INC
   - link: True
     source: r{{ configpath }}/../input/templates
     target: templates
@@ -95,14 +91,9 @@ install_data:
     source: r{{configpath}}/../input/files/
     target: files
 
-
-
 forward_model:
   - well_constraints  -i files/wells_readydate.json -c files/injection_rate_contraints.yml -rc well_rate.json -o wc_wells.json
   - add_templates     -i wc_wells.json -c files/template_config.yml -o at_wells.json
-  - schmerge          -s r{{opm_folder}}/model/SCHEDULE_TEMPLATE.SCH -i at_wells.json -o opm/model/EGG_RATES_EVEREST.SCH
-
-  - flow               opm/model/r{{case_name}}.DATA
-
-  - npv               -s r{{opmbase}}.UNSMRY -o npv -c files/prices.yml -sd 2025-03-25 -ed 2035-11-05 -i files/wells_readydate.json
-
+  - schmerge          -s r{{flow_folder}}/model/SCHEDULE_TEMPLATE.SCH -i at_wells.json -o flow/model/EGG_RATES_EVEREST.SCH
+  - flow               flow/model/r{{case_name}}.DATA
+  - npv               -s r{{flowbase}}.UNSMRY -o npv -c files/prices.yml -sd 2025-03-25 -ed 2035-11-05 -i files/wells_readydate.json
