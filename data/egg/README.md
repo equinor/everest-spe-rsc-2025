@@ -22,7 +22,7 @@ There are deviations from the original dataset that were needed to implement the
 Most of these changes are related to the reservoir simulator `DATA` file.
 These changes are summarized below:
 
-- Replaced the `mDarcy.INC` by a realization depending permeability path.
+- Replaced the `mDarcy.INC` by `PERM.INC` (realization-dependent permeability).
 - Removed `RPTONLY` from the `SUMMARY` section.
 - Added `RPTRST` with `'BASIC=4' 'FREQ=2' 'ALLPROPS'`.
 - Added `FOIP` and `FPR` to the `SUMMARY` section.
