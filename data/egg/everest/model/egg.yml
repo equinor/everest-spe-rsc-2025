@@ -8,7 +8,6 @@ definitions:
 environment:
   simulation_folder: r{{configpath}}/../output/r{{case_name}}/simulation_output
   output_folder: r{{configpath}}/../output/r{{case_name}}
-  random_seed: 123456
 
 wells:
   - { name: INJECT1 }
@@ -61,12 +60,7 @@ optimization:
   min_realizations_success: 1
   min_pert_success: 1
   perturbation_num: 2 
-  max_batch_num: 1 #10 
-
-simulator:
-  queue_system:
-    name: lsf
-    max_running: 200
+  max_batch_num: 10
 
 model:
   realizations: [6, 10, 31, 22, 24, 45, 50, 68, 36, 62]
@@ -83,15 +77,15 @@ install_data:
     source: r{{realization_folder}}/PERM_ECL.INC
     target: flow/model/PERM_ECL.INC
   - link: True
-    source: r{{ configpath }}/../input/templates
+    source: r{{configpath}}/../input/templates
     target: templates
   - link: True
     source: r{{configpath}}/../input/files/
     target: files
 
 forward_model:
-  - well_constraints  -i files/wells_readydate.json -c files/injection_rate_contraints.yml -rc well_rate.json -o wc_wells.json
-  - add_templates     -i wc_wells.json -c files/template_config.yml -o at_wells.json
-  - schmerge          -s r{{flow_folder}}/model/SCHEDULE_TEMPLATE.SCH -i at_wells.json -o flow/model/EGG_RATES_EVEREST.SCH
-  - flow               r{{flowbase}}.DATA
-  - npv               -s r{{flowbase}}.UNSMRY -o npv -c files/prices.yml -sd 2025-03-25 -ed 2035-11-05 -i files/wells_readydate.json
+  - well_constraints -i files/wells_readydate.json -c files/injection_rate_contraints.yml -rc well_rate.json -o wc_wells.json
+  - add_templates    -i wc_wells.json -c files/template_config.yml -o at_wells.json
+  - schmerge         -s r{{flow_folder}}/model/SCHEDULE_TEMPLATE.SCH -i at_wells.json -o flow/model/EGG_RATES_EVEREST.SCH
+  - flow              r{{flowbase}}.DATA
+  - npv              -s r{{flowbase}}.UNSMRY -o npv -c files/prices.yml -sd 2025-03-25 -ed 2035-11-05 -i files/wells_readydate.json
