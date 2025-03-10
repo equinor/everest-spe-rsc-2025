@@ -74,8 +74,8 @@ install_data:
     source: r{{flow_folder}}/model/EGG_MODEL_FLOW.DATA
     target: r{{flowbase}}.DATA
   - link: False
-    source: r{{realization_folder}}/PERM_ECL.INC
-    target: flow/model/PERM_ECL.INC
+    source: r{{realization_folder}}/PERM.INC
+    target: flow/model/PERM.INC
   - link: True
     source: r{{configpath}}/../input/templates
     target: templates
