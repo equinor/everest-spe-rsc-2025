@@ -30,7 +30,6 @@ simple
 │   │   ├── forward_model       # job script for the forward model
 │   │   └── forward_model.py    # Python script for the forward model
 │   └── model
-│       ├── .benchmark.yml      # configuration file to benchmark simple.yml
 │       └── simple.yml          # simple case EVEREST configuration file
 └── README.md                   # this documentation
 ```
@@ -39,13 +38,31 @@ simple
 ## Reproducing the presented results for the `simple.yml` case
 
 The `simple.yml` case as created to exemplify an optimization experiment using one analytical function.
-If you're interested in reproducing the presented results, you have to supplement the `simple.yml` configuration using the content of `.benchmark.yml`.
-As the name suggests, this is a rather simple case, so you can simply copy the contents of `.benchmark.yml` and past it in `simple.yml`.
-For more complicated setups, you should use supporting scripts or tools.
-We suggest `yq`:
+If you're interested in reproducing the presented results, you have to supplement the `simple.yml` configuration using the following keywords and values:
 
-```bash
-yq eval-all '. as $item ireduce ({}; . + $item)' simple.yml .benchmark.yml > simple_benchmark.yml
+```
+environment:
+  random_seed: 2978010
+  output_folder: r{{configpath}}/../output/simple
+  simulation_folder: r{{configpath}}/../output/simple/sim_output
+
+objective_functions:
+- name: objective
+  normalization: 1.0
+  weight: 1.0
+
+optimization:
+  speculative: true
+  perturbation_num: 10
+  algorithm: optpp_q_newton
+  backend: dakota
+  max_batch_num: 10
+  options:
+    - max_step 0.1
+
+export:
+  discard_gradient: false
+  discard_rejected: false
 ```
 
-Finally can you obtain the expected results by running `everest run simple_benchmark.yml` and extracting the complete results from `simple.csv`.
+Finally you can obtain the expected results by running `everest run simple.yml` with the merged configurations and extract the complete results from `simple.csv`.
