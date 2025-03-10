@@ -12,8 +12,10 @@ objective_functions:
 - name: objective
 
 model:
-  realizations:
-  - 0
+  realizations: [0]
+
+optimization:
+  perturbation_num: 10
 
 install_jobs:
 - name: forward_model
