@@ -22,33 +22,18 @@ wells:
 controls:
   - name: well_rate
     type: generic_control
-    min: 0.001
-    max: 1
-    perturbation_magnitude: 0.05
+    perturbation_magnitude: 30
+    min: 0
+    max: 320
     variables:
-      - { name: INJECT1, index: 1, initial_guess: 0.25, enabled: True }
-      - { name: INJECT1, index: 2, initial_guess: 0.25, enabled: True }
-
-      - { name: INJECT2, index: 1, initial_guess: 0.25, enabled: True }
-      - { name: INJECT2, index: 2, initial_guess: 0.25, enabled: True }
-
-      - { name: INJECT3, index: 1, initial_guess: 0.25, enabled: True }
-      - { name: INJECT3, index: 2, initial_guess: 0.25, enabled: True }
-
-      - { name: INJECT4, index: 1, initial_guess: 0.25, enabled: True }
-      - { name: INJECT4, index: 2, initial_guess: 0.25, enabled: True }
-
-      - { name: INJECT5, index: 1, initial_guess: 0.25, enabled: True }
-      - { name: INJECT5, index: 2, initial_guess: 0.25, enabled: True }
-
-      - { name: INJECT6, index: 1, initial_guess: 0.25, enabled: True }
-      - { name: INJECT6, index: 2, initial_guess: 0.25, enabled: True }
-
-      - { name: INJECT7, index: 1, initial_guess: 0.25, enabled: True }
-      - { name: INJECT7, index: 2, initial_guess: 0.25, enabled: True }
-
-      - { name: INJECT8, index: 1, initial_guess: 0.25, enabled: True }
-      - { name: INJECT8, index: 2, initial_guess: 0.25, enabled: True }
+      - { name: INJECT1, initial_guess: [80, 80] }
+      - { name: INJECT2, initial_guess: [80, 80] }
+      - { name: INJECT3, initial_guess: [80, 80] }
+      - { name: INJECT4, initial_guess: [80, 80] }
+      - { name: INJECT5, initial_guess: [80, 80] }
+      - { name: INJECT6, initial_guess: [80, 80] }
+      - { name: INJECT7, initial_guess: [80, 80] }
+      - { name: INJECT8, initial_guess: [80, 80] }
 
 objective_functions:
   - name: npv
