@@ -38,7 +38,7 @@ controls:
 objective_functions:
   - name: npv
     weight: 1
-    scale: 0.00000001
+    scale: 1e8
 
 optimization:
   algorithm: conmin_mfd
