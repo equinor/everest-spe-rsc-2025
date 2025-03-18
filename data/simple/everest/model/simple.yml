@@ -9,7 +9,7 @@ controls:
   - {name: y, initial_guess: -0.25 }
 
 objective_functions:
-- name: objective
+- name: obj
 
 model:
   realizations: [0]
@@ -22,5 +22,5 @@ install_jobs:
   source: r{{configpath}}/../input/forward_model
 
 forward_model:
-  - forward_model --input coordinates.json --output objective
+  - forward_model --input coordinates.json --output obj
   
