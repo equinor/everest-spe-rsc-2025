@@ -3,6 +3,7 @@ definitions:
   user_shortname: r{{os.USER}}
   flow_folder: r{{configpath}}/../../flow/
   flowbase: flow/model/r{{case_name}}
+  eclbase: r{{flowbase}}
   realization_folder: r{{configpath}}/../../flow/realizations/realization-r{{realization}}
 
 environment:
