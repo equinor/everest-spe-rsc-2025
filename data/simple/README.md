@@ -47,15 +47,14 @@ environment:
   simulation_folder: r{{configpath}}/../output/simple/sim_output
 
 objective_functions:
-- name: objective
-  normalization: 1.0
+- name: obj
+  scale: 1.0
   weight: 1.0
 
 optimization:
   speculative: true
   perturbation_num: 10
   algorithm: optpp_q_newton
-  backend: dakota
   max_batch_num: 10
   options:
     - max_step 0.1
