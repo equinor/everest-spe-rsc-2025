@@ -42,10 +42,10 @@ objective_functions:
     scale: 1e8
 
 optimization:
-  algorithm: conmin_mfd
+  algorithm: optpp_q_newton
   min_realizations_success: 1
   min_pert_success: 1
-  perturbation_num: 2 
+  perturbation_num: 1 
   max_batch_num: 10
   speculative: True
 
