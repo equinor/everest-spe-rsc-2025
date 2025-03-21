@@ -16,6 +16,7 @@ model:
 
 optimization:
   perturbation_num: 10
+  speculative: True
 
 install_jobs:
 - name: forward_model
