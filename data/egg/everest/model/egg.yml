@@ -47,6 +47,7 @@ optimization:
   min_pert_success: 1
   perturbation_num: 2 
   max_batch_num: 10
+  speculative: True
 
 model:
   realizations: [6, 10, 31, 22, 24, 45, 50, 68, 36, 62]
