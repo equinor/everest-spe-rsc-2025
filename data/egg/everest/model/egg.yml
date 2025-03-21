@@ -24,7 +24,7 @@ controls:
   - name: well_rate
     type: generic_control
     perturbation_magnitude: 30
-    min: 0
+    min: 0.001
     max: 320
     variables:
       - { name: INJECT1, initial_guess: [80, 80] }
