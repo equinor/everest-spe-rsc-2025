@@ -1,3 +1,7 @@
+> [!IMPORTANT]
+> This repository was intended to be part of the EVEREST course in SPE RSC that took place in March 2025. It is now archived and it will no longer be maintaned.
+> You can still find the content of the Egg case as well as additional tutorials using the Drogon model in https://github.com/equinor/everest-tutorials.
+
 # everest-spe-rsc-2025
 EVEREST SPE RSC 2025 Course
 
